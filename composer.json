@@ -1,0 +1,26 @@
+{
+    "name": "foreverglory/theme-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony ThemeBundle",
+    "keywords": ["symfony", "bundle", "theme"],
+    "homepage": "http://github.foreverglory.me",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ForeverGlory",
+            "email": "foreverglory@qq.com",
+            "homepage": "http://foreverglory.me"
+        }
+    ],
+    "require": {
+        "symfony/symfony": "~2.0"
+    },
+    "require-dev": {
+        "piwik/device-detector": "~1.0"
+    },
+    "autoload": {
+        "psr-0": {"Glory\\ThemeBundle": ""}
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Glory/ThemeBundle"
+}
