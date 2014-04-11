@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface {
         $rootNode
                 ->children()
                 ->scalarNode('model')->defaultNull()->end()
+                ->scalarNode('path')->defaultValue('')->end()
                 ->end();
 
         return $treeBuilder;

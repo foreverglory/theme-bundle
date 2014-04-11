@@ -1,2 +1,9 @@
-
-        
+services:
+    glory_theme.manager:
+        class: Glory\ThemeBundle\Manager\ThemeManager
+        arguments: [@service_container]
+    glory_theme.listener:
+        class: Glory\ThemeBundle\EventListener\ThemeListener
+        arguments: [@glory_theme.manager]
+        tags:
+            -  { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

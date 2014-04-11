@@ -21,7 +21,7 @@ class GloryThemeExtension extends Extension {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
         $container->setParameter('glory_theme_model', $config['model']);
-
+        $container->setParameter('glory_theme_path', $config['path']);
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
     }

@@ -7,8 +7,9 @@
 namespace Glory\ThemeBundle\Model;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
-abstract class AbstractTheme implements ThemeInterface {
+abstract class AbstractTheme implements ThemeInterface, ContainerAwareInterface {
 
     /**
      * ContainerInterface 
@@ -16,17 +17,12 @@ abstract class AbstractTheme implements ThemeInterface {
     protected $container;
     protected $theme;
 
-    public function __construct(ContainerInterface $container) {
+    public function setContainer(ContainerInterface $container = null) {
         $this->container = $container;
     }
 
-    public function get() {
-        return $this->theme;
-    }
-
-    public function set($theme) {
-        $this->theme = $theme;
-        return $this;
+    public function getThemes() {
+        return array();
     }
 
 }
