@@ -70,14 +70,14 @@ class ThemeManager {
         }
         $themePath = $this->getThemePath();
         $twigLoader = $this->container->get('twig.loader');
+        $this->addPaths($twigLoader, $this->container->getParameter('kernel.root_dir') . '/Resources/views/' . $themePath, $themes);
         foreach ($this->container->getParameter('kernel.bundles') as $bundle => $class) {
-            $path = $this->container->getParameter('kernel.root_dir') . '/Resources/' . $bundle . '/views/' . $themePath;
-            $this->addPaths($twigLoader, $path, $themes, $bundle);
             $reflection = new \ReflectionClass($class);
             $path = dirname($reflection->getFilename()) . '/Resources/views/' . $themePath;
             $this->addPaths($twigLoader, $path, $themes, $bundle);
+            $path = $this->container->getParameter('kernel.root_dir') . '/Resources/' . $bundle . '/views/' . $themePath;
+            $this->addPaths($twigLoader, $path, $themes, $bundle);
         }
-        $this->addPaths($twigLoader, $this->container->getParameter('kernel.root_dir') . '/Resources/views/' . $themePath, $themes);
     }
 
     private function addPaths($twigLoader, $themePath, $themes, $bundle = '') {
