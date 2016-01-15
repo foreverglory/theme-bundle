@@ -16,6 +16,10 @@ abstract class AbstractTheme implements ThemeInterface, ContainerAwareInterface 
      */
     protected $container;
     protected $theme;
+    
+    protected $root;
+    protected $path;
+    protected $file;
 
     public function setContainer(ContainerInterface $container = null) {
         $this->container = $container;
@@ -23,6 +27,21 @@ abstract class AbstractTheme implements ThemeInterface, ContainerAwareInterface 
 
     public function getThemes() {
         return array();
+    }
+    
+    public function getRoot()
+    {
+        return $this->root;
+    }
+    
+    public function getPath()
+    {
+        return $this->path;
+    }
+    
+    public function getFile()
+    {
+        return $this->file;
     }
 
 }

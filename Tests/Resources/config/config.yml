@@ -1,0 +1,9 @@
+glory_theme:
+    default: default
+#    switch: ~
+    switch: Glory\ThemeBundle\Switcher\ThemeSwitcher
+    theme: 
+        default:
+            dir: %kernel.root_dir%/Resources/default
+        mobile:
+            dir: %kernel.root_dir%/Resources/mobile

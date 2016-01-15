@@ -10,21 +10,30 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
  */
-class Configuration implements ConfigurationInterface {
+class Configuration implements ConfigurationInterface
+{
 
     /**
      * {@inheritDoc}
      */
-    public function getConfigTreeBuilder() {
+    public function getConfigTreeBuilder()
+    {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('glory_theme');
 
         $rootNode
                 ->children()
-                ->scalarNode('model')->defaultNull()->end()
-                ->scalarNode('path')->defaultValue('')->end()
+                    ->variableNode('default')->defaultValue('')->end()
+                    ->variableNode('switch')->defaultValue('')->end()
+                    ->arrayNode('theme')
+                        ->useAttributeAsKey('name')
+                        ->prototype('array')
+                            ->children()
+                                ->scalarNode('dir')->end()
+                                ->scalarNode('format')->end()
+                            ->end()
+                    ->end()
                 ->end();
-
         return $treeBuilder;
     }
 

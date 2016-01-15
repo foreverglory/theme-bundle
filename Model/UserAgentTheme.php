@@ -37,7 +37,8 @@ class UserAgentTheme extends AbstractTheme {
     public function getThemes() {
         $themes = array();
         $userAgent = $this->container->get('request_stack')->getCurrentRequest()->headers->get('user-agent');
-        $device = $this->getDevice($userAgent);
+        //$device = $this->getDevice($userAgent);
+        $device = 'desktop';
         if (in_array($device, array('desktop'))) {
             $themes[] = 'complete';
         } else {

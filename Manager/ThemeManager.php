@@ -8,92 +8,108 @@ namespace Glory\ThemeBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Glory\ThemeBundle\Model\ThemeInterface;
+use Glory\ThemeBundle\Model\Theme;
+use Glory\ThemeBundle\Switcher\ThemeSwitcherInterface;
 
-class ThemeManager {
+class ThemeManager
+{
 
     /**
      * ContainerInterface 
      */
     protected $container;
-    protected $model;
-    protected $path;
     protected $themes;
+    protected $default;
+    protected $defaultTheme;
+    protected $currentTheme;
+    protected $switch;
 
-    public function __construct(ContainerInterface $container) {
+    public function __construct(ContainerInterface $container)
+    {
         $this->container = $container;
     }
 
-    public function getModel() {
-        if (is_null($this->model)) {
-            if ($this->container->hasParameter('glory_theme_model')) {
-                $class = $this->container->getParameter('glory_theme_model');
-                $this->model = new $class();
-                if ($this->model instanceof ContainerAwareInterface) {
-                    $this->model->setContainer($this->container);
-                }
-                if (!$this->model instanceof ThemeInterface) {
-                    throw new \LogicException('glory_theme model must implements \\Glory\\ThemeBundle\\Model\\ThemeInterface');
-                }
+    public function setThemes($themes)
+    {
+        if (!empty($themes) && is_array($themes)) {
+            foreach ($themes as $name => $theme) {
+                $this->themes[$name] = new Theme($theme);
             }
         }
-        return $this->model;
+        return $this;
     }
 
-    public function getThemePath() {
-        if (is_null($this->path)) {
-            $this->path = $this->container->getParameter('glory_theme_path');
+    public function setDefault($default = null)
+    {
+        if (!empty($default) && !$this->themeExists($default)) {
+            throw new \RuntimeException(sprintf('%s theme not exists.', $default));
         }
-        return $this->path;
+        $this->default = $default;
+        return $this;
     }
 
-    public function getThemes() {
-        if (is_null($this->themes)) {
-            $model = $this->getModel();
-            if (is_null($model)) {
-                $this->themes = array();
-            } else {
-                $this->themes = array_reverse($model->getThemes());
+    public function setSwitchClass($class = null)
+    {
+        if (!empty($class)) {
+            if (!class_exists($class)) {
+                throw new \RuntimeException(sprintf('%s theme switch class not exists.', $class));
+            }
+            $this->switch = new $class();
+            if (!$this->switch instanceof ContainerAwareInterface) {
+                throw new \RuntimeException(sprintf('%s theme switch class must instanceof ContainerAwareInterface.', $class));
+            } elseif (!$this->switch instanceof ThemeSwitcherInterface) {
+                throw new \RuntimeException(sprintf('%s theme switch class must instanceof ThemeSwitchInterface.', $class));
+            }
+            $this->switch->setContainer($this->container);
+            $this->switch->setThemes($this->themes);
+        }
+        return $this;
+    }
+
+    public function themeExists($name)
+    {
+        return array_key_exists($name, $this->themes);
+    }
+
+    /**
+     * 
+     * @return Theme
+     */
+    public function getCurrentTheme()
+    {
+        if (empty($this->currentTheme)) {
+            if ($this->switch) {
+                $theme = $this->switch->getChecked();
+            }
+            if (empty($theme)) {
+                $theme = $this->default;
+            }
+            if (!empty($theme)) {
+                $this->currentTheme = $this->getTheme($theme);
             }
         }
-        return $this->themes;
+        return $this->currentTheme;
     }
 
-    public function enableTheme($themes = null) {
-        if (is_null($themes)) {
-            $themes = $this->getThemes();
+    public function getTheme($name)
+    {
+        if (!$this->themeExists($name)) {
+            throw new \RuntimeException(sprintf('%s theme is not exists.', $name));
         }
-        if (empty($themes)) {
-            return;
-        } elseif (!is_array($themes)) {
-            $themes = array($themes);
-        }
-        $themePath = $this->getThemePath();
-        $twigLoader = $this->container->get('twig.loader');
-        $this->addPaths($twigLoader, $this->container->getParameter('kernel.root_dir') . '/Resources/views/' . $themePath, $themes);
-        foreach ($this->container->getParameter('kernel.bundles') as $bundle => $class) {
-            $reflection = new \ReflectionClass($class);
-            $path = dirname($reflection->getFilename()) . '/Resources/views/' . $themePath;
-            $this->addPaths($twigLoader, $path, $themes, $bundle);
-            $path = $this->container->getParameter('kernel.root_dir') . '/Resources/' . $bundle . '/views/' . $themePath;
-            $this->addPaths($twigLoader, $path, $themes, $bundle);
-        }
+        return $this->themes[$name];
     }
 
-    private function addPaths($twigLoader, $themePath, $themes, $bundle = '') {
-        $namespace = $bundle;
-        if ('Bundle' === substr($bundle, -6)) {
-            $namespace = substr($bundle, 0, -6);
+    public function getDefaultTheme()
+    {
+        if ($this->defaultTheme) {
+            $this->defaultTheme = $this->getTheme($this->default);
         }
-        foreach ($themes as $theme) {
-            if (is_dir($path = $themePath . '/' . $theme)) {
-                if (empty($namespace)) {
-                    $twigLoader->prependPath($path);
-                } else {
-                    $twigLoader->prependPath($path, $namespace);
-                }
-            }
-        }
+        return $this->defaultTheme;
+    }
+
+    public function formatThemePath()
+    {
+        
     }
 
 }
