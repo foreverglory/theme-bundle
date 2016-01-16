@@ -39,6 +39,11 @@ class ThemeManager
         return $this;
     }
 
+    public function getThemes()
+    {
+        return $this->themes;
+    }
+
     public function setDefault($default = null)
     {
         if (!empty($default) && !$this->themeExists($default)) {
