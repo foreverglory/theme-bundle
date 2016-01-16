@@ -13,10 +13,12 @@
         }
     ],
     "require": {
-        "symfony/symfony": ">=2.3.0"
+        "symfony/symfony": "~2.3"
     },
     "require-dev": {
-        "piwik/device-detector": "~1.0"
+    },
+    "suggests": {
+        "suncat/mobile-detect-bundle": "~0.10"
     },
     "autoload": {
         "psr-0": {"Glory\\ThemeBundle": ""}

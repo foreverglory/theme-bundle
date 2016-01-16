@@ -29,9 +29,13 @@ class ThemeSwitcher implements ThemeSwitcherInterface, ContainerAwareInterface
         return $this;
     }
 
+    /**
+     * get Current theme
+     * @return string
+     */
     public function getChecked()
     {
-        return 'default';
+        return '';
     }
 
 }
