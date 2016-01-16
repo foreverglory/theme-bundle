@@ -39,9 +39,11 @@ class ThemeLocator implements FileLocatorInterface
     public function locate($file, $currentPath = null, $first = true)
     {
         $theme = $this->manager->getCurrentTheme();
-        $template = $this->locateTheme($file, $theme, $first);
-        if ($template) {
-            return $template;
+        if ($theme) {
+            $template = $this->locateTheme($file, $theme, $first);
+            if ($template) {
+                return $template;
+            }
         }
         return $this->locator->locate($file, $currentPath, $first);
     }
