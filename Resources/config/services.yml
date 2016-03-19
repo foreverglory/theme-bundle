@@ -1,14 +1,14 @@
 parameters:
-    twig.loader.filesystem.class: Glory\ThemeBundle\Loader\TwigLoader
+    twig.loader.filesystem.class: Glory\Bundle\ThemeBundle\Loader\TwigLoader
 services:
     glory_theme.listener:
-        class: Glory\ThemeBundle\EventListener\ThemeListener
+        class: Glory\Bundle\ThemeBundle\EventListener\ThemeListener
         arguments: [@service_container]
         tags:
             -  { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
 #    glory_theme.twig.loader:
-#        class: Glory\ThemeBundle\Loader\TwigLoader
+#        class: Glory\Bundle\ThemeBundle\Loader\TwigLoader
 #        arguments: [@templating.locator, @templating.name_parser]
 #        tags:
 #            - { name: twig.loader }
@@ -16,15 +16,15 @@ services:
 #        alias: glory_theme.twig.loader
 
     glory_theme.manager:
-        class: Glory\ThemeBundle\Manager\ThemeManager
+        class: Glory\Bundle\ThemeBundle\Manager\ThemeManager
         arguments: [@service_container]
         
     glory_theme.theme.locator:
-        class: Glory\ThemeBundle\Locator\ThemeLocator
+        class: Glory\Bundle\ThemeBundle\Locator\ThemeLocator
         arguments: [@kernel, @glory_theme.manager, @file_locator]
 
     glory_theme.templating.locator:
-        class: Glory\ThemeBundle\Locator\TemplatingLocator
+        class: Glory\Bundle\ThemeBundle\Locator\TemplatingLocator
         arguments: [@glory_theme.theme.locator, %kernel.cache_dir%]
 
     templating.locator:

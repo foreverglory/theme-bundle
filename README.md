@@ -25,7 +25,7 @@ public function registerBundles()
 {
     return array(
          // ...
-        new Glory\ThemeBundle\GloryThemeBundle(),
+        new Glory\Bundle\ThemeBundle\GloryThemeBundle(),
         // ...
     );
 }
@@ -36,7 +36,7 @@ public function registerBundles()
 #app/conﬁg/conﬁg.yml
 glory_theme:
     default: default        #default theme, Allow Null or One of theme list. （默认主题，允许为空或者下面配置中的一个主题）
-    switch: ~               #switch theme, class, if exist use class->getChecked(); （切换主题，类，如果存在，则优先取该类所选择的主题，参考） see: Glory/ThemeBundle/Switcher/*, you can write class
+    switch: ~               #switch theme, class, if exist use class->getChecked(); （切换主题，类，如果存在，则优先取该类所选择的主题，参考） see: ThemeBundle/Switcher/*, you can write class
     theme:                  #theme list
         default:            #theme name, theme dir
             dir: %kernel.root_dir%/Resources/desktop

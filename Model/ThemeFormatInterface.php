@@ -1,6 +1,6 @@
 <?php
 
-namespace Glory\ThemeBundle\Model;
+namespace Glory\Bundle\ThemeBundle\Model;
 
 /**
  *

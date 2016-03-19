@@ -1,11 +1,10 @@
 <?php
 
-namespace Glory\ThemeBundle\Locator;
+namespace Glory\Bundle\ThemeBundle\Locator;
 
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Config\FileLocatorInterface;
-use Glory\ThemeBundle\Model\Theme;
-use Glory\ThemeBundle\Manager\ThemeManager;
+use Glory\Bundle\ThemeBundle\Manager\ThemeManager;
 
 /**
  * Description of ThemeLocator

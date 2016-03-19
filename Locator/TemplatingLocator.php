@@ -1,6 +1,6 @@
 <?php
 
-namespace Glory\ThemeBundle\Locator;
+namespace Glory\Bundle\ThemeBundle\Locator;
 
 use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator;
 

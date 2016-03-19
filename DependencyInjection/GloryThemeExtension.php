@@ -1,12 +1,11 @@
 <?php
 
-namespace Glory\ThemeBundle\DependencyInjection;
+namespace Glory\Bundle\ThemeBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
-use Glory\ThemeBundle\Model\Theme;
 
 /**
  * This is the class that loads and manages your bundle configuration

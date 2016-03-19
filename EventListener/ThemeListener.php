@@ -1,6 +1,6 @@
 <?php
 
-namespace Glory\ThemeBundle\EventListener;
+namespace Glory\Bundle\ThemeBundle\EventListener;
 
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;

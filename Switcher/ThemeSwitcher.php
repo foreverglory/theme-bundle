@@ -4,7 +4,7 @@
  * @author ForeverGlory
  */
 
-namespace Glory\ThemeBundle\Switcher;
+namespace Glory\Bundle\ThemeBundle\Switcher;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;

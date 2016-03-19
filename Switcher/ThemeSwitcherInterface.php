@@ -1,6 +1,6 @@
 <?php
 
-namespace Glory\ThemeBundle\Switcher;
+namespace Glory\Bundle\ThemeBundle\Switcher;
 
 /**
  * Description of ThemeSwitchInterface

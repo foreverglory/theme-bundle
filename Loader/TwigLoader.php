@@ -1,6 +1,6 @@
 <?php
 
-namespace Glory\ThemeBundle\Loader;
+namespace Glory\Bundle\ThemeBundle\Loader;
 
 use Symfony\Bundle\TwigBundle\Loader\FilesystemLoader;
 

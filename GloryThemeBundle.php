@@ -1,6 +1,6 @@
 <?php
 
-namespace Glory\ThemeBundle;
+namespace Glory\Bundle\ThemeBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

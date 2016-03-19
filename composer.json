@@ -12,6 +12,9 @@
             "homepage": "http://foreverglory.me"
         }
     ],
+    "autoload": {
+        "psr-0": {"Glory\\Bundle\\ThemeBundle": ""}
+    },
     "require": {
         "symfony/symfony": "~2.3"
     },
@@ -19,10 +22,5 @@
     },
     "suggests": {
         "suncat/mobile-detect-bundle": "~0.10"
-    },
-    "autoload": {
-        "psr-0": {"Glory\\ThemeBundle": ""}
-    },
-    "minimum-stability": "dev",
-    "target-dir": "Glory/ThemeBundle"
+    }
 }

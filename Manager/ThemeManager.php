@@ -4,12 +4,12 @@
  * @author ForeverGlory
  */
 
-namespace Glory\ThemeBundle\Manager;
+namespace Glory\Bundle\ThemeBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Glory\ThemeBundle\Model\Theme;
-use Glory\ThemeBundle\Switcher\ThemeSwitcherInterface;
+use Glory\Bundle\ThemeBundle\Model\Theme;
+use Glory\Bundle\ThemeBundle\Switcher\ThemeSwitcherInterface;
 
 class ThemeManager
 {

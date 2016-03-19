@@ -4,7 +4,7 @@
  * @author ForeverGlory
  */
 
-namespace Glory\ThemeBundle\Model;
+namespace Glory\Bundle\ThemeBundle\Model;
 
 class UserAgentTheme extends AbstractTheme {
 
