@@ -14,6 +14,8 @@ class Theme
     protected $dir;
     protected $format;
     protected $empty = true;
+    protected $parent;
+    protected $condition;
 
     public function __construct($data = array())
     {
@@ -58,6 +60,22 @@ class Theme
     public function formatFile($file)
     {
         return $file;
+    }
+
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+        return $this;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function getCondition()
+    {
+        return $this->condition;
     }
 
 }
