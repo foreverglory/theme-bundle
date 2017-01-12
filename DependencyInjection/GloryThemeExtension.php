@@ -26,7 +26,7 @@ class GloryThemeExtension extends Extension
         $loader->load('services.yml');
 
         $themeManagerDefinition = $container->getDefinition('glory_theme.manager');
-        $themeManagerDefinition->addMethodCall('setThemes', array($config['theme']));
+        $themeManagerDefinition->addMethodCall('setThemes', array($config['themes']));
         $themeManagerDefinition->addMethodCall('setDefault', array($config['default']));
         $themeManagerDefinition->addMethodCall('setSwitchClass', array($config['switch']));
 
