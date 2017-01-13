@@ -37,12 +37,12 @@ public function registerBundles()
 glory_theme:
     default: default        #default theme, Allow Null or One of theme list. （默认主题，允许为空或者下面配置中的一个主题）
     switch: ~               #switch theme, class, if exist use class->getChecked(); （切换主题，类，如果存在，则优先取该类所选择的主题，参考） see: ThemeBundle/Switcher/*, you can write class
-    theme:                  #theme list
+    themes:                 #themes list
         default:            #theme name, theme dir
             dir: %kernel.root_dir%/Resources/desktop
             format: ~       #todo
         mobile:
-            dir: %kernel.root_dir%/Resources/mobile
+            path: %kernel.root_dir%/Resources/mobile
 ```
 
 PHP examples
