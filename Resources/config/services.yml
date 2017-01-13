@@ -1,5 +1,6 @@
 parameters:
-    twig.loader.filesystem.class: Glory\Bundle\ThemeBundle\Loader\TwigLoader
+    #twig.loader.filesystem.class: Glory\Bundle\ThemeBundle\Loader\TwigLoader
+    templating.name_parser.class: Glory\Bundle\ThemeBundle\Templating\TemplateNameParser
 services:
     glory_theme.listener:
         class: Glory\Bundle\ThemeBundle\EventListener\ThemeListener
@@ -17,7 +18,7 @@ services:
 
     glory_theme.manager:
         class: Glory\Bundle\ThemeBundle\Manager\ThemeManager
-        arguments: [@service_container]
+        arguments: [@service_container,'@request_stack']
         
     glory_theme.theme.locator:
         class: Glory\Bundle\ThemeBundle\Locator\ThemeLocator
@@ -27,5 +28,5 @@ services:
         class: Glory\Bundle\ThemeBundle\Locator\TemplatingLocator
         arguments: [@glory_theme.theme.locator, %kernel.cache_dir%]
 
-    templating.locator:
-        alias: glory_theme.templating.locator
+    #templating.locator:
+    #    alias: glory_theme.templating.locator
