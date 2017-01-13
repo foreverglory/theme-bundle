@@ -7,9 +7,11 @@
 namespace Glory\Bundle\ThemeBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Glory\Bundle\ThemeBundle\Model\Theme;
 use Glory\Bundle\ThemeBundle\Switcher\ThemeSwitcherInterface;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class ThemeManager
 {
@@ -18,15 +20,21 @@ class ThemeManager
      * ContainerInterface 
      */
     protected $container;
-    protected $themes;
+
+    /**
+     * @var Request 
+     */
+    protected $request;
+    protected $themes = [];
     protected $default;
     protected $defaultTheme;
     protected $currentTheme;
     protected $switch;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, \Symfony\Component\HttpFoundation\RequestStack $requestStack)
     {
         $this->container = $container;
+        $this->request = $requestStack->getCurrentRequest();
     }
 
     public function setThemes($themes)
@@ -83,6 +91,16 @@ class ThemeManager
     public function getCurrentTheme()
     {
         if (empty($this->currentTheme)) {
+            foreach ($this->getThemes() as $theme) {
+                $expressionLanguage = new ExpressionLanguage();
+                if ($expressionLanguage->evaluate($theme->getCondition(), [
+                            'container' => $this->container,
+                            'request' => $this->request
+                        ])
+                ) {
+                    return $this->currentTheme = $theme;
+                }
+            }
             if ($this->switch) {
                 $theme = $this->switch->getChecked();
             }
